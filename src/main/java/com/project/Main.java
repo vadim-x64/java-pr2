@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         String filePath = "https://informer.com.ua/dut/java/pr2.csv";
 
-        TransactionReader reader = new TransactionReader();
+        TransactionCSVReader reader = new TransactionCSVReader();
         TransactionParser parser = new TransactionParser();
 
         List<String> lines = reader.readLines(filePath);
