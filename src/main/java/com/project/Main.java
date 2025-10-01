@@ -12,8 +12,13 @@ public class Main {
         List<String> lines = reader.readLines(filePath);
         List<Transaction> transactions = parser.parsing(lines);
 
+        TransactionAnalyzer analyzer = new TransactionAnalyzer(transactions);
+        double totalBalance = analyzer.calculateTotalBalance();
+
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
         }
+
+        System.out.println("Загальний баланс: " + totalBalance);
     }
 }
