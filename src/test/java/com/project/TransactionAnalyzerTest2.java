@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 class TransactionAnalyzerTest2 {
+
     @Test
     public void testCountTransactionsByMonth() {
         Transaction transaction1 = new Transaction("01-02-2023", 50.0, "Дохід");
