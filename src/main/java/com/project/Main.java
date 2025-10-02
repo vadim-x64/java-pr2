@@ -11,8 +11,8 @@ public class Main {
 
         List<String> lines = reader.readLines(filePath);
         List<Transaction> transactions = parser.parsing(lines);
-
         TransactionAnalyzer analyzer = new TransactionAnalyzer(transactions);
+
         double totalBalance = analyzer.calculateTotalBalance();
 
         for (Transaction transaction : transactions) {
@@ -20,5 +20,9 @@ public class Main {
         }
 
         System.out.println("Загальний баланс: " + totalBalance);
+
+        String monthYear = "01-2024";
+        int transactionsCount = analyzer.countTransactionsByMonth(monthYear);
+        System.out.println("Кількість транзакцій за " + monthYear + ": " + transactionsCount);
     }
 }
