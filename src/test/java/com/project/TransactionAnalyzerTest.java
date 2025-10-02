@@ -18,6 +18,6 @@ class TransactionAnalyzerTest {
 
         double result = analyzer.calculateTotalBalance();
 
-        Assertions.assertEquals(200.0, result, "Розрахунок загального балансу неправильний");
+        Assertions.assertEquals(200.0, result, "Розрахунок загального балансу неправильний.");
     }
 }
