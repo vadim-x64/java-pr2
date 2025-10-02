@@ -20,6 +20,10 @@ public class Main {
         reportGenerator.printTransactionsByMonth("01-2024");
 
         List<Transaction> topExpenses = analyzer.findTopExpenses();
+
         reportGenerator.printTopExpensesReport(topExpenses);
+        reportGenerator.printMinMaxExpensesReport("01-01-2024", "31-01-2024");
+        reportGenerator.printExpensesByCategoryReport(1000.0);
+        reportGenerator.printExpensesByMonthReport(5000.0);
     }
 }
