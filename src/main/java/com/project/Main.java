@@ -15,12 +15,11 @@ public class Main {
         TransactionAnalyzer analyzer = new TransactionAnalyzer(transactions);
         TransactionReportGenerator reportGenerator = new TransactionReportGenerator(analyzer, transactions);
 
-        for (Transaction transaction : transactions) {
-            System.out.println(transaction);
-        }
-
         reportGenerator.printAllTransactions();
         reportGenerator.printTotalBalance();
         reportGenerator.printTransactionsByMonth("01-2024");
+
+        List<Transaction> topExpenses = analyzer.findTopExpenses();
+        reportGenerator.printTopExpensesReport(topExpenses);
     }
 }

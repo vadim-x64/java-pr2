@@ -2,7 +2,9 @@ package com.project;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TransactionAnalyzer {
     private final List<Transaction> transactions;
@@ -36,5 +38,17 @@ public class TransactionAnalyzer {
         }
 
         return count;
+    }
+
+    public List<Transaction> findTopExpenses() {
+        return transactions.stream()
+                // фільтрує по умові
+                .filter(t -> t.getAmount() < 0)
+                // сортує за сумою
+                .sorted(Comparator.comparingDouble(Transaction::getAmount))
+                // тільки 10 елементів
+                .limit(10)
+                // перетворює потік назад у список
+                .collect(Collectors.toList());
     }
 }
