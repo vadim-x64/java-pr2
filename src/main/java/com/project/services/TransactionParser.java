@@ -1,4 +1,6 @@
-package com.project;
+package com.project.services;
+
+import com.project.models.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;

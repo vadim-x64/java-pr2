@@ -1,4 +1,6 @@
-package com.project;
+package com.project.services;
+
+import com.project.models.Transaction;
 
 import java.util.List;
 import java.util.Map;
@@ -38,7 +40,7 @@ public class TransactionReportGenerator {
 
     // звіт про мін./макс. витрати за період
     public void printMinMaxExpensesReport(String startDate, String endDate) {
-        System.out.println("\n=== Аналіз витрат за період з " + startDate + " по " + endDate + " ===");
+        System.out.println("\nАналіз витрат за період з " + startDate + " по " + endDate);
 
         Transaction[] minMax = analyzer.findMinMaxExpensesInPeriod(startDate, endDate);
         Transaction maxExpense = minMax[0];
@@ -48,20 +50,20 @@ public class TransactionReportGenerator {
             System.out.println("Найбільша витрата: " + maxExpense.getDescription() +
                     " - " + Math.abs(maxExpense.getAmount()) + " грн (" + maxExpense.getDate() + ")");
         } else {
-            System.out.println("Найбільша витрата: не знайдено");
+            System.out.println("Найбільша витрата: не знайдено.");
         }
 
         if (minExpense != null) {
             System.out.println("Найменша витрата: " + minExpense.getDescription() +
                     " - " + Math.abs(minExpense.getAmount()) + " грн (" + minExpense.getDate() + ")");
         } else {
-            System.out.println("Найменша витрата: не знайдено");
+            System.out.println("Найменша витрата: не знайдено.");
         }
     }
 
     // текстовий звіт з візуалізацією по категоріях
     public void printExpensesByCategoryReport(double scale) {
-        System.out.println("\n=== Витрати по категоріях ===");
+        System.out.println("\nВитрати по категоріях");
         System.out.println("(кожна * = " + scale + " грн)\n");
 
         Map<String, Double> categoryExpenses = analyzer.calculateExpensesByCategory();
@@ -82,7 +84,7 @@ public class TransactionReportGenerator {
 
     // текстовий звіт з візуалізацією по місяцях
     public void printExpensesByMonthReport(double scale) {
-        System.out.println("\n=== Витрати по місяцях ===");
+        System.out.println("\nВитрати по місяцях");
         System.out.println("(кожна * = " + scale + " грн)\n");
 
         Map<String, Double> monthExpenses = analyzer.calculateExpensesByMonth();

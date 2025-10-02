@@ -1,5 +1,11 @@
 package com.project;
 
+import com.project.models.Transaction;
+import com.project.services.TransactionAnalyzer;
+import com.project.services.TransactionCSVReader;
+import com.project.services.TransactionParser;
+import com.project.services.TransactionReportGenerator;
+
 import java.util.List;
 
 public class Main {

@@ -1,4 +1,6 @@
-package com.project;
+package com.project.services;
+
+import com.project.models.Transaction;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

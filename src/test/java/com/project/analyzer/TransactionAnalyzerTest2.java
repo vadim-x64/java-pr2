@@ -1,5 +1,7 @@
-package com.project;
+package com.project.analyzer;
 
+import com.project.models.Transaction;
+import com.project.services.TransactionAnalyzer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
