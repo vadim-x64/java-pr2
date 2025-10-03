@@ -7,9 +7,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-// тільки читає рядки з файлу CSV по URL і повертає List<String>
-public class TransactionCSVReader {
-    public List<String> readLines(String filePath) {
+// тепер утилітарний клас
+public abstract class TransactionCSVReader {
+
+    public static List<String> readLines(String filePath) {
         List<String> lines = new ArrayList<>();
 
         try {

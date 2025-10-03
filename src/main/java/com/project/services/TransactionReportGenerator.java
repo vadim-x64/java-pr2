@@ -1,36 +1,28 @@
 package com.project.services;
 
 import com.project.models.Transaction;
-
 import java.util.List;
 import java.util.Map;
 
-public class TransactionReportGenerator {
-    private final TransactionAnalyzer analyzer;
-    private final List<Transaction> transactions;
+public abstract class TransactionReportGenerator {
 
-    public TransactionReportGenerator(TransactionAnalyzer analyzer, List<Transaction> transactions) {
-        this.analyzer = analyzer;
-        this.transactions = transactions;
-    }
-
-    public void printAllTransactions() {
+    public static void printAllTransactions(List<Transaction> transactions) {
         for (Transaction transaction : transactions) {
             System.out.println(transaction);
         }
     }
 
-    public void printTotalBalance() {
-        double totalBalance = analyzer.calculateTotalBalance();
+    public static void printTotalBalance(List<Transaction> transactions) {
+        double totalBalance = TransactionAnalyzer.calculateTotalBalance(transactions);
         System.out.println("Загальний баланс: " + totalBalance);
     }
 
-    public void printTransactionsByMonth(String monthYear) {
-        int count = analyzer.countTransactionsByMonth(monthYear);
+    public static void printTransactionsByMonth(List<Transaction> transactions, String monthYear) {
+        int count = TransactionAnalyzer.countTransactionsByMonth(transactions, monthYear);
         System.out.println("Кількість транзакцій за " + monthYear + ": " + count);
     }
 
-    public void printTopExpensesReport(List<Transaction> topExpenses) {
+    public static void printTopExpensesReport(List<Transaction> topExpenses) {
         System.out.println("10 найбільших витрат:");
 
         for (Transaction expense : topExpenses) {
@@ -38,11 +30,10 @@ public class TransactionReportGenerator {
         }
     }
 
-    // звіт про мін./макс. витрати за період
-    public void printMinMaxExpensesReport(String startDate, String endDate) {
+    public static void printMinMaxExpensesReport(List<Transaction> transactions, String startDate, String endDate) {
         System.out.println("\nАналіз витрат за період з " + startDate + " по " + endDate);
 
-        Transaction[] minMax = analyzer.findMinMaxExpensesInPeriod(startDate, endDate);
+        Transaction[] minMax = TransactionAnalyzer.findMinMaxExpensesInPeriod(transactions, startDate, endDate);
         Transaction maxExpense = minMax[0];
         Transaction minExpense = minMax[1];
 
@@ -61,42 +52,40 @@ public class TransactionReportGenerator {
         }
     }
 
-    // текстовий звіт з візуалізацією по категоріях
-    public void printExpensesByCategoryReport(double scale) {
+    public static void printExpensesByCategoryReport(List<Transaction> transactions, double scale) {
         System.out.println("\nВитрати по категоріях");
         System.out.println("(кожна * = " + scale + " грн)\n");
 
-        Map<String, Double> categoryExpenses = analyzer.calculateExpensesByCategory();
+        Map<String, Double> categoryExpenses = TransactionAnalyzer.calculateExpensesByCategory(transactions);
 
         for (Map.Entry<String, Double> entry : categoryExpenses.entrySet()) {
             String category = entry.getKey();
             double amount = entry.getValue();
             int stars = (int) Math.round(amount / scale);
-            String visualization = "";
+            StringBuilder visualization = new StringBuilder();
 
             for (int i = 0; i < stars; i++) {
-                visualization += "*";
+                visualization.append("*");
             }
 
             System.out.printf("%-20s %8.2f грн | %s\n", category, amount, visualization);
         }
     }
 
-    // текстовий звіт з візуалізацією по місяцях
-    public void printExpensesByMonthReport(double scale) {
+    public static void printExpensesByMonthReport(List<Transaction> transactions, double scale) {
         System.out.println("\nВитрати по місяцях");
         System.out.println("(кожна * = " + scale + " грн)\n");
 
-        Map<String, Double> monthExpenses = analyzer.calculateExpensesByMonth();
+        Map<String, Double> monthExpenses = TransactionAnalyzer.calculateExpensesByMonth(transactions);
 
         for (Map.Entry<String, Double> entry : monthExpenses.entrySet()) {
             String month = entry.getKey();
             double amount = entry.getValue();
             int stars = (int) Math.round(amount / scale);
-            String visualization = "";
+            StringBuilder visualization = new StringBuilder();
 
             for (int i = 0; i < stars; i++) {
-                visualization += "*";
+                visualization.append("*");
             }
 
             System.out.printf("%s: %8.2f грн | %s\n", month, amount, visualization);

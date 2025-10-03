@@ -1,25 +1,15 @@
 package com.project.services;
 
 import com.project.models.Transaction;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class TransactionAnalyzer {
-    private final List<Transaction> transactions;
-    private DateTimeFormatter dateFormatter;
+public abstract class TransactionAnalyzer {
+    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    public TransactionAnalyzer(List<Transaction> transactions) {
-        this.transactions = transactions;
-        this.dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    }
-
-    public double calculateTotalBalance() {
+    public static double calculateTotalBalance(List<Transaction> transactions) {
         double balance = 0.0;
 
         for (Transaction transaction : transactions) {
@@ -29,7 +19,7 @@ public class TransactionAnalyzer {
         return balance;
     }
 
-    public int countTransactionsByMonth(String monthYear) {
+    public static int countTransactionsByMonth(List<Transaction> transactions, String monthYear) {
         int count = 0;
 
         for (Transaction transaction : transactions) {
@@ -44,20 +34,15 @@ public class TransactionAnalyzer {
         return count;
     }
 
-    public List<Transaction> findTopExpenses() {
+    public static List<Transaction> findTopExpenses(List<Transaction> transactions) {
         return transactions.stream()
-                // фільтрує по умові
                 .filter(t -> t.getAmount() < 0)
-                // сортує за сумою
                 .sorted(Comparator.comparingDouble(Transaction::getAmount))
-                // тільки 10 елементів
                 .limit(10)
-                // перетворює потік назад у список
                 .collect(Collectors.toList());
     }
 
-    // найбільша та найменша витрата за період
-    public Transaction[] findMinMaxExpensesInPeriod(String startDate, String endDate) {
+    public static Transaction[] findMinMaxExpensesInPeriod(List<Transaction> transactions, String startDate, String endDate) {
         LocalDate start = LocalDate.parse(startDate, dateFormatter);
         LocalDate end = LocalDate.parse(endDate, dateFormatter);
         Transaction minExpense = null;
@@ -81,7 +66,7 @@ public class TransactionAnalyzer {
         return new Transaction[]{maxExpense, minExpense};
     }
 
-    public Map<String, Double> calculateExpensesByCategory() {
+    public static Map<String, Double> calculateExpensesByCategory(List<Transaction> transactions) {
         Map<String, Double> categoryExpenses = new HashMap<>();
 
         for (Transaction transaction : transactions) {
@@ -95,8 +80,7 @@ public class TransactionAnalyzer {
         return categoryExpenses;
     }
 
-    // рахує витрати по місяцях
-    public Map<String, Double> calculateExpensesByMonth() {
+    public static Map<String, Double> calculateExpensesByMonth(List<Transaction> transactions) {
         Map<String, Double> monthExpenses = new HashMap<>();
 
         for (Transaction transaction : transactions) {
