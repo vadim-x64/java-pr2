@@ -7,7 +7,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-// тепер утилітарний клас
 public abstract class TransactionCSVReader {
 
     public static List<String> readLines(String filePath) {
