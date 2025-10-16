@@ -11,8 +11,7 @@ class TransactionCSVReaderTest {
     public void testReadLines() {
         String filePath = "https://informer.com.ua/dut/java/pr2.csv";
 
-        TransactionCSVReader reader = new TransactionCSVReader();
-        List<String> lines = reader.readLines(filePath);
+        List<String> lines = TransactionCSVReader.readLines(filePath);
 
         Assertions.assertFalse(lines.isEmpty(), "Файл CSV не повинен бути порожнім.");
         Assertions.assertTrue(lines.size() > 1, "CSV повинен містити заголовок та дані.");

@@ -19,8 +19,7 @@ class TransactionAnalyzerTest3 {
         Transaction t6 = new Transaction("06-01-2024", -2000.0, "Велика покупка");
 
         List<Transaction> transactions = Arrays.asList(t1, t2, t3, t4, t5, t6);
-        TransactionAnalyzer analyzer = new TransactionAnalyzer(transactions);
-        List<Transaction> topExpenses = analyzer.findTopExpenses();
+        List<Transaction> topExpenses = TransactionAnalyzer.findTopExpenses(transactions);
 
         for (Transaction expense : topExpenses) {
             Assertions.assertTrue(expense.getAmount() < 0, "У топ витратах повинні бути тільки негативні суми.");

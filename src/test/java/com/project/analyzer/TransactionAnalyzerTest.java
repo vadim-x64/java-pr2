@@ -16,8 +16,7 @@ class TransactionAnalyzerTest {
         Transaction transaction3 = new Transaction("2023-01-03", 150.0, "Дохід");
 
         List<Transaction> transactions = Arrays.asList(transaction1, transaction2, transaction3);
-        TransactionAnalyzer analyzer = new TransactionAnalyzer(transactions);
-        double result = analyzer.calculateTotalBalance();
+        double result = TransactionAnalyzer.calculateTotalBalance(transactions);
 
         Assertions.assertEquals(200.0, result, "Розрахунок загального балансу неправильний.");
     }
